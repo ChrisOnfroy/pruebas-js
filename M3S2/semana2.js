@@ -1,41 +1,87 @@
-let product = [
-  {
-    id: 1,
-    nombre: "Teclado Mecánico",
-    precio: 120,
-  },
-  {
-    id: 2,
-    nombre: "Mouse Gamer",
-    precio: 80,
-  },
-  {
-    id: 3,
-    nombre: "Monitor 24 pulgadas",
-    precio: 950,
-  },
-];
+// TASK 1
 
-product.push({
-  id: 3,
-  nombre: "Monitor 27 pulgadas",
-  precio: 1250,
-});
+let products = [
+    {
+        id: 1,
+        nombre: "iPhone 15",
+        precio: 5200
+    },
+    {
+        id: 2,
+        nombre: "Samsung Galaxy S24",
+        precio: 4300
+    },
+    {
+        id: 3,
+        nombre: "Xiaomi Redmi Note 13",
+        precio: 1200
+    },
+    {
+        id: 4,
+        nombre: "Motorola Edge 50",
+        precio: 2100
+    },
+    {
+        id: 5,
+        nombre: "Huawei P60",
+        precio: 3900
+    },
+    {
+        id: 6,
+        nombre: "Realme GT",
+        precio: 1800
+    },
+    {
+        id: 7,
+        nombre: "Google Pixel 8",
+        precio: 4100
+    },
+    {
+        id: 8,
+        nombre: "OnePlus 12",
+        precio: 3500
+    }
+]
 
-console.log(product);
+// TASK 2
 
-let MySet = new Set([1,3,5,7,8,2,3,5]);
+const producto = parseInt(prompt("Ingrese la ID del producto: "))
+const nombreProducto = prompt("Ingrese el nombre del producto: ")
+const precioProducto = parseInt(prompt("Ingrese el precio del producto: "))
 
-MySet.add(9)
+let myProducts = new Set(products);
 
-const num = prompt("Ingrese un numero: ")
+console.log(myProducts)
 
-console.log(num)
+const addProduct = (id_producto, nombre_producto, precio_producto) => {
+  myProducts.add({
+    id: id_producto,
+    nombre: nombre_producto,
+    precio: precio_producto,
+  });
+  return console.log("Product is Created");
+}
 
-MySet.has(num)
+addProduct(producto, nombreProducto, precioProducto);
 
-const deleteNum = prompt("Ingrese numero a eliminar: ")
+const getProduct =  () => {
+  const searchProduct = prompt("Ingresa el numero de identificacion del producto: ")
+  for (const products of myProducts) {
+    if(products.id === searchProduct){
+      console.log(myProducts.has(products))
+    }
+  }
+}
 
-MySet.delete(deleteNum) 
+getProduct()
 
-console.log(MySet);
+const deleteProduct = () => {
+  for (const products of myProducts) {
+    if(products.nombre === "Google Pixel 8"){
+      myProducts.delete(products)
+      return console.log("The product has been deleted")
+    }
+  }
+}
+
+deleteProduct()
