@@ -47,30 +47,35 @@ let products = [
 // TASK 2
 // se digita porteclado el id, el nombre y el precio del producto, luego se validan y despues se agrega el producto
 
-const producto = parseInt(prompt("Ingrese la ID del producto: "))
-const nombreProducto = prompt("Ingrese el nombre del producto: ")
-const precioProducto = parseInt(prompt("Ingrese el precio del producto: "))
-
-validationString(nombreProducto)
-validationNum(producto)
-validationNum(precioProducto)
-validationNegativeNumber(producto)
-validationNegativeNumber(precioProducto)
-  
 let myProducts = new Set(products);
 
-console.log(myProducts)
+try {
+  const producto = Number(prompt("Ingrese la ID del producto: "))
+  const nombreProducto = prompt("Ingrese el nombre del producto: ")
+  const precioProducto = Number(prompt("Ingrese el precio del producto: "))
 
-const addProduct = (id_producto, nombre_producto, precio_producto) => {
-  myProducts.add({
-    id: id_producto,
-    nombre: nombre_producto,
-    precio: precio_producto,
-  });
-  return console.log("Product is Created");
+  validationString(nombreProducto)
+  validationNum(producto)
+  validationNum(precioProducto)
+  validationNegativeNumber(producto)
+  validationNegativeNumber(precioProducto)
+
+  console.log(myProducts)
+
+  const addProduct = (id_producto, nombre_producto, precio_producto) => {
+    myProducts.add({
+      id: id_producto,
+      nombre: nombre_producto,
+      precio: precio_producto,
+    });
+    console.log("Product is Created")
+  }
+
+  addProduct(producto, nombreProducto, precioProducto);
+
+} catch (error) {
+  console.error(error.message)
 }
-
-addProduct(producto, nombreProducto, precioProducto);
 
 let cars = new Set(['audi', 'chevrolet', 'mazda', 'nissan', 'corolla', 'ford', 'mcllaren', 'bmw', 'mercedez benz', 'byd'])
 
@@ -91,7 +96,6 @@ const deleteProduct = () => {
 }
 
 deleteProduct()
-
 
 // TASK 3
 // manejo del map, el set, el get, has and deleted
@@ -123,7 +127,6 @@ console.log(productos.has('precio'))
 
 console.log(productos.delete('id', 10))
 
-
 // TASK 4
 // manejo de los for of, for in, foreach
 for (product of products){
@@ -134,30 +137,27 @@ for(const key in productos){
   console.log(`${key}: ${productos[key]}`)
 }
 
-
 products.forEach(product =>{
   console.log(`The ${product.nombre}, is in offer to ${product.precio}`)
 })
 
-
 //TASK 5
 // implementando validaciones
 
-
 function validationNum(num){
-  if(!Number.isInteger(num)){
-    return console.log("Ingrese un precio correcto")
+  if (!Number.isInteger(num)) {
+    throw new Error("Ingrese un número entero válido")
   }
 }
 
-  
-function validationString (string) {
-  if (!string || string.trim() === "" || string.trim() === NaN) {
-    return console.log('Escriba un string');
+function validationString(string) {
+  if (typeof string !== 'string' || string.trim() === '') {
+    throw new Error('Escriba un string válido')
   }
 }
-function validationNegativeNumber (number) {
-  if(number < 0 || number == NaN){
-    return console.log('Porfavor digite un numero positivo')
+
+function validationNegativeNumber(number) {
+  if (typeof number !== 'number' || Number.isNaN(number) || number < 0) {
+    throw new Error('Por favor digite un número positivo')
   }
 }
