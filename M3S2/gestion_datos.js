@@ -98,7 +98,7 @@ const deleteProduct = () => {
 deleteProduct()
 
 // TASK 3
-// manejo del map, el set, el get, has and deleted
+// manejo del map, el set, el get, has y deleted
 
 let productos = new Map()
 
@@ -151,8 +151,12 @@ function validationNum(num){
 }
 
 function validationString(string) {
-  if (typeof string !== 'string' || string.trim() === '') {
+  const trimmed = typeof string === 'string' ? string.trim() : ''
+  if (!trimmed) {
     throw new Error('Escriba un string válido')
+  }
+  if (/[0-9]/.test(trimmed)) {
+    throw new Error('El nombre no puede contener números')
   }
 }
 
